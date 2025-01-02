@@ -1,5 +1,11 @@
 import { model, Schema } from "mongoose";
 
+const messageSchema = new Schema({
+  text: { type: String, required: true },
+  sender: { type: String, enum: ["user", "bot"], required: true },
+  createdAt: { type: Date, default: Date.now },
+});
+
 const chatsSchema = new Schema(
   {
     firstName: {
@@ -10,6 +16,7 @@ const chatsSchema = new Schema(
       type: String,
       required: true,
     },
+    messages: [messageSchema],
   },
   {
     timestamps: true,
