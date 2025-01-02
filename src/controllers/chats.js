@@ -3,12 +3,27 @@ import {
   deleteChat,
   getAllChats,
   getChatById,
+  searchChatsByNameOrLastName,
   updateChat,
 } from "../services/chats.js";
 import createHttpError from "http-errors";
 
 export const getChatsController = async (req, res) => {
-  const chats = await getAllChats();
+  const { search } = req.query;
+
+  let chats;
+  if (search) {
+    chats = await searchChatsByNameOrLastName(search);
+
+    if (chats.length === 0) {
+      return res.status(404).json({
+        status: 404,
+        message: "No chats found matching the search criteria.",
+      });
+    }
+  } else {
+    chats = await getAllChats();
+  }
 
   res.json({
     status: 200,

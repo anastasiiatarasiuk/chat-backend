@@ -5,6 +5,13 @@ export const getAllChats = async () => {
   return chats;
 };
 
+export const searchChatsByNameOrLastName = async (search) => {
+  const regex = new RegExp(search, "i");
+  return await ChatsCollection.find({
+    $or: [{ firstName: regex }, { lastName: regex }],
+  });
+};
+
 export const getChatById = async (chatId) => {
   const chat = await ChatsCollection.findById(chatId);
   return chat;
