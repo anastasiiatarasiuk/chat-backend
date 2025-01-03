@@ -1,0 +1,42 @@
+tags:
+  - Chats
+summary: Get list of chats
+operationId: getChats
+description: "Get list of chats with optional search and filters"
+parameters:
+  - in: query
+    name: search
+    schema:
+      type: string
+    example: "John"
+    description: "Search term to filter chats by first or last name"
+responses:
+  "200":
+    description: Successfully found chats!
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: Successfully found chats!
+            data:
+              type: object
+              required:
+                - firstName
+                - lastName
+              properties:
+                data:
+                  type: array
+                  items:
+                    $ref: ../../components/schemas/chat.yaml
+  "400":
+    description: "Bad request"

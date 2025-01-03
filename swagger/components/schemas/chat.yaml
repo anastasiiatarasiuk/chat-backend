@@ -1,0 +1,49 @@
+type: object
+required:
+  - _id
+  - firstName
+  - lastName
+  - messages
+properties:
+  _id:
+    description: "Chat's id"
+    type: string
+    example: "64e6f82b3ad9a0f2b76e8c5d"
+  firstName:
+    description: "Chat participant's first name"
+    type: string
+    example: "John"
+  lastName:
+    description: "Chat participant's last name"
+    type: string
+    example: "Doe"
+  messages:
+    description: "Array of messages in the chat"
+    type: array
+    items:
+      type: object
+      required:
+        - text
+        - sender
+      properties:
+        text:
+          description: "Message text"
+          type: string
+          example: "Hello, how are you?"
+        sender:
+          description: "Message sender"
+          type: string
+          enum:
+            - user
+            - bot
+          example: "user"
+        createdAt:
+          description: "Message creation date"
+          type: string
+          format: date-time
+          example: "2024-12-31T12:34:56Z"
+  createdAt:
+    description: "Chat creation date"
+    type: string
+    format: date-time
+    example: "2024-12-31T12:00:00Z"

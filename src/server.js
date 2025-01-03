@@ -4,6 +4,7 @@ import cors from "cors";
 import chatsRouter from "./routers/chats.js";
 import { notFoundHandler } from "./middlewares/notFoundHandler.js";
 import { errorHandler } from "./middlewares/errorHandler.js";
+import { swaggerDocs } from "./middlewares/swaggerDocs.js";
 
 const PORT = 3000;
 
@@ -22,6 +23,8 @@ export const startServer = () => {
   );
 
   app.use(chatsRouter);
+
+  app.use("/api-docs", swaggerDocs());
 
   app.use("*", notFoundHandler);
 

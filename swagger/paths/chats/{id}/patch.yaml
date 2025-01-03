@@ -1,0 +1,53 @@
+tags:
+  - Chats
+summary: Patch chat by id
+operationId: patchChat
+description: "Update chat by id"
+parameters:
+  - in: path
+    name: id
+    required: true
+    schema:
+      type: string
+      example: "65ca67e7ae7f10c88b598384"
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          firstName:
+            description: "Chat's first name"
+            type: string
+            example: "John"
+          lastName:
+            description: "Chat's last name"
+            type: string
+            example: "Doe"
+        required:
+          - firstName
+          - lastName
+responses:
+  "200":
+    description: "Chat updated successfully"
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: "Successfully updated chat"
+            data:
+              type: object
+              $ref: "../../../components/schemas/chat.yaml"
+  "404":
+    $ref: "../../../components/responses/404.yaml"

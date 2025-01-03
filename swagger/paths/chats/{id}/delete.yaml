@@ -1,0 +1,18 @@
+tags:
+  - Chats
+summary: Delete chat by id
+operationId: deleteChat
+description: "Delete chat by id"
+security: []
+parameters:
+  - in: path
+    name: id
+    required: true
+    schema:
+      type: string
+      example: "65ca67e7ae7f10c88b598384"
+responses:
+  "204":
+    description: "Successfully deleted chat"
+  "404":
+    $ref: "../../../components/responses/404.yaml"
